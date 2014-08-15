@@ -97,6 +97,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Config\ClientInfo.cs" />
     <Compile Include="OAuth\Connection.cs" />
     <Compile Include="OAuth\RequestBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

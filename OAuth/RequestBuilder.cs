@@ -36,6 +36,7 @@ namespace Slack_for_WP.OAuth
             req.Method = method.ToString();
             req.ContentType = "application/x-www-form-urlencoded";
             req.ContentLength = data.Length;
+
             await Task.Run(delegate
             {
                 Mutex mutex = new Mutex(false);
