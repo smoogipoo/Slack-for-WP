@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Slack_for_WP.Slack
 {
-    class EndpointObjects
+    class SerializationObjects
     {
         #region Types
 
         [DataContract]
-        internal class BasicResponse
+        public class BasicResponse
         {
             [DataMember(Name = "ok")]
             public bool Success { get; set; }
         }
 
         [DataContract]
-        internal class Paging
+        public class Paging
         {
             [DataMember(Name = "count")]
             public int Count { get; set; }
@@ -35,7 +35,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class Icon
+        public class Icon
         {
             [DataMember(Name = "image_24")]
             public string Image24 { get; set; }
@@ -54,7 +54,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class File
+        public class File
         {
             [DataMember(Name = "id")]
             public string ID { get; set; }
@@ -166,7 +166,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class MemberProfile
+        public class MemberProfile
         {
             [DataMember(Name = "first_name")]
             public string FirstName { get; set; }
@@ -203,7 +203,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class Member
+        public class Member
         {
             [DataMember(Name = "id")]
             public string ID { get; set; }
@@ -228,7 +228,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class Message
+        public class Message
         {
             [DataMember(Name = "type")]
             public string Type { get; set; }
@@ -289,7 +289,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class ChannelDescription
+        public class ChannelDescription
         {
             [DataMember(Name = "value")]
             public string Value { get; set; }
@@ -302,7 +302,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class Channel
+        public class Channel
         {
             [DataMember(Name = "id")]
             public string ID { get; set; }
@@ -345,7 +345,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class IMChannel
+        public class IMChannel
         {
             [DataMember(Name = "id")]
             public string ID { get; set; }
@@ -365,28 +365,28 @@ namespace Slack_for_WP.Slack
         #region ChannelInfos
 
         [DataContract]
-        internal class BasicChannelInfo : BasicResponse
+        public class BasicChannelInfo : BasicResponse
         {
             [DataMember(Name = "channel")]
             public Channel Channel { get; set; }
         }
 
         [DataContract]
-        internal class ChannelJoinInfo : BasicChannelInfo
+        public class ChannelJoinInfo : BasicChannelInfo
         {
             [DataMember(Name = "already_in_channel")]
             public bool AlreadyInChannel { get; set; }
         }
 
         [DataContract]
-        internal class ChannelLeaveInfo : BasicResponse
+        public class ChannelLeaveInfo : BasicResponse
         {
             [DataMember(Name = "not_in_channel")]
             public bool NotInChannel { get; set; }
         }
 
         [DataContract]
-        internal class ChannelHistoryInfo : BasicResponse
+        public class ChannelHistoryInfo : BasicResponse
         {
             [DataMember(Name = "latest")]
             public string Latest { get; set; }
@@ -396,14 +396,14 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class ChannelListInfo : BasicResponse
+        public class ChannelListInfo : BasicResponse
         {
             [DataMember(Name = "channels")]
             public Channel[] Channels { get; set; }
         }
 
         [DataContract]
-        internal class IMListInfo : BasicResponse
+        public class IMListInfo : BasicResponse
         {
             [DataMember(Name = "ims")]
             public IMChannel[] IMChannels { get; set; }
@@ -414,14 +414,14 @@ namespace Slack_for_WP.Slack
         #region FileInfos
 
         [DataContract]
-        internal class FileInfo : BasicResponse
+        public class FileInfo : BasicResponse
         {
             [DataMember]
             public File File { get; set; }
         }
 
         [DataContract]
-        internal class FileListInfo : BasicResponse
+        public class FileListInfo : BasicResponse
         {
             [DataMember]
             public File[] Files { get; set; }
@@ -435,14 +435,14 @@ namespace Slack_for_WP.Slack
         #region GroupInfos
 
         [DataContract]
-        internal class GroupHistoryInfo : ChannelHistoryInfo
+        public class GroupHistoryInfo : ChannelHistoryInfo
         {
             [DataMember(Name = "has_more")]
             public bool HasMoreMessages { get; set; }
         }
 
         [DataContract]
-        internal class GroupListInfo : BasicResponse
+        public class GroupListInfo : BasicResponse
         {
             [DataMember(Name = "groups")]
             public Channel[] Groups { get; set; }
@@ -455,7 +455,7 @@ namespace Slack_for_WP.Slack
         #region ChatInfos
 
         [DataContract]
-        internal class BasicChatInfo : BasicResponse
+        public class BasicChatInfo : BasicResponse
         {
             [DataMember(Name = "ts")]
             public string Timestamp { get; set; }
@@ -465,7 +465,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class ChatUpdateInfo : BasicChatInfo
+        public class ChatUpdateInfo : BasicChatInfo
         {
             [DataMember(Name = "text")]
             public string Text { get; set; }
@@ -476,7 +476,7 @@ namespace Slack_for_WP.Slack
         #region AuthInfos
 
         [DataContract]
-        internal class AuthTestInfo : BasicResponse
+        public class AuthTestInfo : BasicResponse
         {
             [DataMember(Name = "url")]
             public string URL { get; set; }
@@ -495,7 +495,7 @@ namespace Slack_for_WP.Slack
         }
 
         [DataContract]
-        internal class OAuthAccessInfo
+        public class OAuthAccessInfo
         {
             [DataMember(Name = "access_token")]
             public string AccessToken { get; set; }
@@ -509,7 +509,7 @@ namespace Slack_for_WP.Slack
         #region UserInfos
 
         [DataContract]
-        internal class UserListInfo : BasicResponse
+        public class UserListInfo : BasicResponse
         {
             [DataMember(Name = "members")]
             public Member[] Members { get; set; }
@@ -520,7 +520,7 @@ namespace Slack_for_WP.Slack
         #region EmojiInfos
 
         [DataContract]
-        internal class EmojiListInfo : BasicResponse
+        public class EmojiListInfo : BasicResponse
         {
             [DataMember(Name = "emoji")]
             public Dictionary<string, string> Emojis { get; set; }
