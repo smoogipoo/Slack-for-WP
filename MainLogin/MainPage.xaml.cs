@@ -5,7 +5,7 @@ using Microsoft.Phone.Controls;
 
 namespace Slack_for_WP.MainLogin
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MainPage
     {
         public MainPage()
         {

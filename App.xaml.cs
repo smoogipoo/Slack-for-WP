@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Slack_for_WP.Resources;
+using Slack_for_WP.Slack;
 
 namespace Slack_for_WP
 {
@@ -225,6 +226,7 @@ namespace Slack_for_WP
         #endregion
 
         private static Modes currentMode = Modes.MainLogin;
+        internal static SerializationObjects.OAuthAccessInfo OAuthInfo;
 
         internal static void ChangeMode(Modes newMode)
         {
@@ -241,7 +243,8 @@ namespace Slack_for_WP
         internal enum Modes
         {
             MainLogin,
-            OAuthLogin
+            OAuthLogin,
+            Slack
         }
     }
 }

@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using Slack_for_WP.Config;
+using Slack_for_WP.OAuth;
 using Slack_for_WP.Slack;
 
-namespace Slack_for_WP.OAuth
+namespace Slack_for_WP.OAuthLogin
 {
     public partial class OAuthBrowserWindow
     {
@@ -33,7 +30,24 @@ namespace Slack_for_WP.OAuth
             Dictionary<string, string> parameters = p.Select(param => param.Split('=')).ToDictionary(split => split[0], split => split[1]);
 
             if (parameters.ContainsKey("code"))
-                return;
+            {
+                e.Cancel = true;
+
+                HttpWebRequest req = RequestBuilder.BuildRequest(Endpoints.OAuthAccess, new[,]
+                {
+                    { "client_id", Client.ID },
+                    { "client_secret", Client.Secret },
+                    { "code" , parameters["code"] }
+                }).Result;
+
+                RequestBuilder.PeformRequest(OAuthTokenReceived, req);
+            }
+        }
+
+        private void OAuthTokenReceived(string result)
+        {
+            App.OAuthInfo = Serializer.Deserialize<SerializationObjects.OAuthAccessInfo>(result);
+            App.ChangeMode(App.Modes.Slack);
         }
     }
 }
