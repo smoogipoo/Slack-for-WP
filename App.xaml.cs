@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Resources;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
@@ -12,6 +13,7 @@ namespace Slack_for_WP
 {
     public partial class App : Application
     {
+        #region Auto-Generated Application Events
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -67,6 +69,7 @@ namespace Slack_for_WP
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            ChangeMode(Modes.MainLogin);
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -218,6 +221,27 @@ namespace Slack_for_WP
 
                 throw;
             }
+        }
+        #endregion
+
+        private static Modes currentMode = Modes.MainLogin;
+
+        internal static void ChangeMode(Modes newMode)
+        {
+            if (currentMode != newMode)
+            {
+                currentMode = newMode;
+
+                //Pages are stored in the respective folders
+                Frame currentFrame = Application.Current.RootVisual as Frame;
+                currentFrame.Navigate(new Uri(string.Format("/{0}/MainPage.xaml", newMode), UriKind.Relative));
+            }
+        }
+
+        internal enum Modes
+        {
+            MainLogin,
+            OAuthLogin
         }
     }
 }

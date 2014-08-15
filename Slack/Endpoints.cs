@@ -38,6 +38,7 @@
         SearchAll,
 
         //General OAuth
+        Authorize,
         TestAuth,
         OAuthAccess,
     }
@@ -69,6 +70,7 @@
             {"ChatPostMessage",     "chat.postMessage"},
             {"ChatSearchMessages",  "search.messages"},
             {"SearchAll",           "search.all"},
+            {"Authorize",           "authorize"},
             {"TestAuth",            "auth.test"},
             {"OAuthAccess",         "oauth.access"}
         };
