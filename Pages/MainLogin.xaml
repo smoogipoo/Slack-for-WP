@@ -14,10 +14,8 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Button Content="Button" HorizontalAlignment="Left" Margin="173,316,0,0" VerticalAlignment="Top" Height="116" Width="206" Click="Button_Click"/>
-
-
+    <Grid x:Name="LayoutRoot" Background="#FFE0BC">
+        
     </Grid>
 
 </phone:PhoneApplicationPage>

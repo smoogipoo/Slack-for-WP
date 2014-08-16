@@ -16,12 +16,6 @@ namespace Slack_for_WP
     {
         #region Auto-Generated Application Events
         /// <summary>
-        /// Provides easy access to the root frame of the Phone Application.
-        /// </summary>
-        /// <returns>The root frame of the Phone Application.</returns>
-        public static PhoneApplicationFrame RootFrame { get; private set; }
-
-        /// <summary>
         /// Constructor for the Application object.
         /// </summary>
         public App()
@@ -225,6 +219,7 @@ namespace Slack_for_WP
         }
         #endregion
 
+        public static PhoneApplicationFrame RootFrame { get; private set; }
         private static Modes currentMode = Modes.MainLogin;
         internal static SerializationObjects.OAuthAccessInfo OAuthInfo;
 
@@ -235,8 +230,7 @@ namespace Slack_for_WP
                 currentMode = newMode;
 
                 //Pages are stored in the respective folders
-                Frame currentFrame = Application.Current.RootVisual as Frame;
-                currentFrame.Navigate(new Uri(string.Format("/{0}/MainPage.xaml", newMode), UriKind.Relative));
+                RootFrame.Navigate(new Uri(string.Format("/Pages/{0}.xaml", newMode), UriKind.Relative));
             }
         }
 
@@ -244,7 +238,7 @@ namespace Slack_for_WP
         {
             MainLogin,
             OAuthLogin,
-            Slack
+            SlackMain
         }
     }
 }

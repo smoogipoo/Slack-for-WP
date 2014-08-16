@@ -47,7 +47,7 @@ namespace Slack_for_WP.OAuthLogin
         private void OAuthTokenReceived(string result)
         {
             App.OAuthInfo = Serializer.Deserialize<SerializationObjects.OAuthAccessInfo>(result);
-            App.ChangeMode(App.Modes.Slack);
+            App.ChangeMode(App.Modes.SlackMain);
         }
     }
 }
