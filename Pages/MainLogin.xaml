@@ -14,10 +14,10 @@
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="#FFE0BC" HorizontalAlignment="Right" Width="480">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource BGMain}" HorizontalAlignment="Right" Width="480">
         <Image x:Name="Logo" Source="/Resources/SlackLogo.png" RenderTransformOrigin="0.5,0.5" Height="194" Width="194" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-300,0,0"/>
-        <ProgressBar x:Name="ProgressBar" IsIndeterminate="True" Foreground="#FF873700" VerticalAlignment="Center" HorizontalAlignment="Center" Width="192"/>
-        <Button x:Name="LoginButton" Content="Login with Slack" VerticalAlignment="Center" HorizontalAlignment="Center" Width="244" Background="Transparent" ClickMode="Press" Foreground="#FF873700" BorderBrush="#FF873700" Visibility="Collapsed" Click="loginClick"/>
+        <ProgressBar x:Name="ProgressBar" IsIndeterminate="True" Foreground="{StaticResource FGControl}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="192"/>
+        <Button x:Name="LoginButton" Content="Login with Slack" VerticalAlignment="Center" HorizontalAlignment="Center" Width="244" Background="Transparent" ClickMode="Press" Foreground="{StaticResource FGControl}" BorderBrush="{StaticResource FGControl}" Visibility="Collapsed" Click="loginClick"/>
     </Grid>
 
 </phone:PhoneApplicationPage>
