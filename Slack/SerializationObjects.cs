@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Slack_for_WP.Slack
 {
-    class SerializationObjects
+    namespace SerializationObjects
     {
         #region Types
 
@@ -16,6 +16,9 @@ namespace Slack_for_WP.Slack
         {
             [DataMember(Name = "ok")]
             public bool Success { get; set; }
+
+            [DataMember(Name = "error")]
+            public string Error { get; set; }
         }
 
         [DataContract]

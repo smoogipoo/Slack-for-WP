@@ -4,18 +4,24 @@ using System.Linq;
 using System.Net;
 using Microsoft.Phone.Controls;
 using Slack_for_WP.Config;
-using Slack_for_WP.OAuth;
 using Slack_for_WP.Slack;
+using Slack_for_WP.Slack.SerializationObjects;
 
-namespace Slack_for_WP.OAuthLogin
+namespace Slack_for_WP.Pages
 {
-    public partial class OAuthBrowserWindow
+    public partial class OAuthLogin
     {
-        public OAuthBrowserWindow()
+        public OAuthLogin()
         {
             InitializeComponent();
 
             Browser.Navigate(new Uri("https://slack.com/oauth/authorize?client_id=" + Client.ID));
+        }
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            App.ChangeMode(App.Modes.MainLogin);
+            e.Cancel = true;
         }
 
         private void Browser_Navigating(object sender, NavigatingEventArgs e)
@@ -38,7 +44,7 @@ namespace Slack_for_WP.OAuthLogin
                     { "client_id", Client.ID },
                     { "client_secret", Client.Secret },
                     { "code" , parameters["code"] }
-                }).Result;
+                }, RequestBuilder.RequestMethods.GET);
 
                 RequestBuilder.PeformRequest(OAuthTokenReceived, req);
             }
@@ -46,8 +52,8 @@ namespace Slack_for_WP.OAuthLogin
 
         private void OAuthTokenReceived(string result)
         {
-            App.OAuthInfo = Serializer.Deserialize<SerializationObjects.OAuthAccessInfo>(result);
-            App.ChangeMode(App.Modes.SlackMain);
+            App.Auth = Serializer.Deserialize<OAuthAccessInfo>(result);
+            App.ChangeMode(App.Modes.MainLogin);
         }
     }
 }

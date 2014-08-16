@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Slack_for_WP.Resources;
 using Slack_for_WP.Slack;
+using Slack_for_WP.Slack.SerializationObjects;
 
 namespace Slack_for_WP
 {
@@ -58,13 +59,13 @@ namespace Slack_for_WP
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            ChangeMode(Modes.MainLogin);
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            ChangeMode(Modes.MainLogin);
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -221,7 +222,9 @@ namespace Slack_for_WP
 
         public static PhoneApplicationFrame RootFrame { get; private set; }
         private static Modes currentMode = Modes.MainLogin;
-        internal static SerializationObjects.OAuthAccessInfo OAuthInfo;
+
+        internal static OAuthAccessInfo Auth;
+        internal static AuthTestInfo AuthInfo;
 
         internal static void ChangeMode(Modes newMode)
         {

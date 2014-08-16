@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
+﻿using Microsoft.Phone.Controls;
 
-namespace Slack_for_WP.Slack
+namespace Slack_for_WP.Pages
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class SlackMain : PhoneApplicationPage
     {
-        public MainPage()
+        public SlackMain()
         {
             InitializeComponent();
         }

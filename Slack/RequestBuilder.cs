@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Slack_for_WP.Slack;
 
-namespace Slack_for_WP.OAuth
+namespace Slack_for_WP.Slack
 {
     class RequestBuilder
     {
@@ -34,14 +30,15 @@ namespace Slack_for_WP.OAuth
             return targetURL + targetVerb;
         }
 
-        internal static async Task<HttpWebRequest> BuildRequest(Endpoints endpoint, string[,] parameters, RequestMethods method = RequestMethods.POST)
+        internal static HttpWebRequest BuildRequest(Endpoints endpoint, string[,] parameters, RequestMethods method = RequestMethods.POST)
         {
             string targetURL = string.Format(APIUrl, EndpointHelper.Parse(endpoint));
             string targetVerb = "";
 
-            for (int i = 0; i < parameters.GetLength(0); i++)
+            if (parameters != null)
             {
-                targetVerb += (i == 0 ? "?" : "&") + parameters[i, 0] + "=" + Uri.EscapeDataString(parameters[i, 1]);
+                for (int i = 0; i < parameters.GetLength(0); i++)
+                    targetVerb += (i == 0 ? "?" : "&") + parameters[i, 0] + "=" + Uri.EscapeDataString(parameters[i, 1]);
             }
 
             HttpWebRequest req = null;
@@ -50,18 +47,19 @@ namespace Slack_for_WP.OAuth
             {
                 case RequestMethods.GET:
                     req = WebRequest.CreateHttp(targetURL + targetVerb);
+                    req.Method = "GET";
                     break;
                 case RequestMethods.POST:
                     req = WebRequest.CreateHttp(targetURL);
+                    req.Method = "POST";
                     req.ContentType = "application/x-www-form-urlencoded";
 
                     byte[] data = Encoding.UTF8.GetBytes(targetVerb);
-                    using (Stream reqStream = await Task<Stream>.Factory.FromAsync(req.BeginGetRequestStream, req.EndGetRequestStream, null))
-                        await reqStream.WriteAsync(data, 0, data.Length);
+                    using (Stream reqStream = Task<Stream>.Factory.FromAsync(req.BeginGetRequestStream, req.EndGetRequestStream, null).Result)
+                        reqStream.Write(data, 0, data.Length);
                     break;
             }
 
-            req.Method = method.ToString();
             return req;
         }
 
