@@ -7,6 +7,8 @@ namespace Slack_for_WP.Pages
         public SlackMain()
         {
             InitializeComponent();
+
+            ChannelName.Text = App.AuthInfo.Team;
         }
     }
 }
